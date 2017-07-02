@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		a{text-decoration: none;color:#333;}
+		ul,li{list-style: none;}
+		body{
+			font-size: 14px;
+			font-family:"微软雅黑";
+		}
+		#canvas{position:absolute;background:black;}
+		#box{width:300px;height: 180px;border:1px solid #fff;position:absolute;}
+		#box img{width:300px;height:180px;}
+		.item{height: 30px;width: 60px;border-radius:2px;background: red;color: #fff;position: fixed;cursor: pointer;
+			text-align: center;line-height: 30px;
+		}
+		#btn{top:300px;}
+		#reload{top:340px;}
+	</style>
+</head>
+<body>
+		
+	<canvas id="canvas" > </canvas>	
+	<div id="box"> <img></div>
+	<div id="btn" class="item">预览</div>
+	<div id="reload" class="item">重画</div>
+
+	<script type="text/javascript">
+		var canvas, ctx;
+		window.onload = function(){
+			var canvas = document.getElementById("canvas");
+			w = window.innerWidth;
+			h = window.innerHeight;
+			canvas.width = w;
+			canvas.height = h;			
+			ctx = canvas.getContext("2d");
+
+			canvas.onmousedown = start;
+			canvas.onmousemove = draw;
+			canvas.onmouseup = function(){
+				mark = false;
+			}
+
+			var btnDom = document.getElementById("btn");
+			btnDom.onclick = function(){
+				document.querySelector('#box img').src = canvas.toDataURL();
+			}
+
+			document.getElementById("reload").onclick = function(){
+				//清空两种方式
+				//1.用canvas矩形清空
+				//ctx.clearRect(0,0,w,h);
+				//2.刷新一下浏览器	
+				window.location.reload();	
+			}
+
+
+		}	
+		var mark = false;
+		function start(e){
+			mark = true;
+			ctx.beginPath();
+			ctx.strokeStyle = 'red';
+			ctx.lineWidth = 5;
+			ctx.moveTo(e.pageX, e.pageY);
+		}
+
+		function draw(e){
+			if(mark){
+				ctx.lineTo(e.pageX, e.pageY);
+				ctx.stroke();	
+			}
+			
+		}
+	</script>
+	
+</body>
+</html>

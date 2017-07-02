@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		a{text-decoration: none;color:#333;}
+		ul,li{list-style: none;}
+		body{
+			font-size: 14px;
+			font-family:"微软雅黑";
+		}
+		#canvas{
+			margin: 0 auto;
+			display: block;
+			background:#000
+
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500">
+		
+	</canvas>
+
+	<script>
+		/**
+		 *
+		 */
+		
+		//1. 获取画布
+		//2. 获取绘画环境
+		//3. 开始绘画	
+		//4. 喷墨	
+		var canvas = document.getElementById("canvas");
+		//创建了一个2d的绘画环境
+		var ctx = canvas.getContext("2d");		
+		//开始绘画
+		ctx.beginPath();
+		//线的起点		
+		ctx.moveTo(100,100);
+		ctx.lineTo(200,200);
+		ctx.strokeStyle = 'red';//
+		ctx.lineWidth = '10'; //线宽
+
+		//喷墨	实心的 空心的
+		 ctx.stroke();//空心的
+        	
+		ctx.rect(240,200,100,100);
+		ctx.stroke();
+		//ctx.fillStyle = 'red';
+		//ctx.fill();//实心的
+		
+		//开始绘画 每次都初始化绘画环境的话 就可以不产生黏连的效果
+		ctx.beginPath();
+		ctx.fillStyle = 'red';//
+		//x,y,r,0,2π //两个最后参数是多少度到多少度
+		ctx.arc(250,100,30,0,Math.PI*2);
+		//ctx.stroke();
+		ctx.fill();//实心的
+
+
+
+	</script>
+</body>
+</html>
